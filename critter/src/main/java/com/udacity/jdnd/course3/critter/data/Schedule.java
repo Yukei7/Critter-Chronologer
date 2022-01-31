@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
-@Table
 @Entity
 public class Schedule {
     @Id
@@ -15,23 +14,16 @@ public class Schedule {
     private long id;
 
     @ManyToMany(targetEntity = Employee.class)
-    private List<Long> employeeIds;
+    private List<Employee> employees;
 
     @ManyToMany(targetEntity = Pet.class)
-    private List<Long> petIds;
+    private List<Pet> pets;
 
     private LocalDate date;
 
     @ElementCollection
     private Set<EmployeeSkill> activities;
 
-    public Schedule(LocalDate date, Set<EmployeeSkill> activities) {
-        this.date = date;
-        this.activities = activities;
-    }
-
-    public Schedule() {
-    }
 
     // getter and setter
 
@@ -43,20 +35,20 @@ public class Schedule {
         this.id = id;
     }
 
-    public List<Long> getEmployeeIds() {
-        return employeeIds;
+    public List<Employee> getEmployees() {
+        return employees;
     }
 
-    public void setEmployeeIds(List<Long> employeeIds) {
-        this.employeeIds = employeeIds;
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 
-    public List<Long> getPetIds() {
-        return petIds;
+    public List<Pet> getPets() {
+        return pets;
     }
 
-    public void setPetIds(List<Long> petIds) {
-        this.petIds = petIds;
+    public void setPets(List<Pet> pets) {
+        this.pets = pets;
     }
 
     public LocalDate getDate() {
