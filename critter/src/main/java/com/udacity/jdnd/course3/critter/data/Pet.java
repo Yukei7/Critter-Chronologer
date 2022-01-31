@@ -1,32 +1,45 @@
-package com.udacity.jdnd.course3.critter.pet;
+package com.udacity.jdnd.course3.critter.data;
 
+import com.udacity.jdnd.course3.critter.pet.PetType;
+import org.hibernate.annotations.Nationalized;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
-/**
- * Represents the form that pet request and response data takes. Does not map
- * to the database directly.
- */
-public class PetDTO {
-    private long id;
+@Table
+@Entity
+public class Pet {
+    @Id
+    @GeneratedValue
+    private Long id;
     private PetType type;
+    @Nationalized
     private String name;
-    private long ownerId;
+
+    @ManyToOne(targetEntity = Customer.class, optional = false)
+    private Customer customer;
     private LocalDate birthDate;
     private String notes;
 
-    public PetDTO(long id, PetType type, String name, long ownerId, LocalDate birthDate, String notes) {
-        this.id = id;
+    public Pet(PetType type, String name, LocalDate birthDate, String notes) {
         this.type = type;
         this.name = name;
-        this.ownerId = ownerId;
         this.birthDate = birthDate;
         this.notes = notes;
     }
 
-    public PetDTO() {
+    public Pet() {
     }
 
-    //  getter and setter
+    // getter and setter
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public PetType getType() {
         return type;
@@ -44,12 +57,12 @@ public class PetDTO {
         this.name = name;
     }
 
-    public long getOwnerId() {
-        return ownerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setOwnerId(long ownerId) {
-        this.ownerId = ownerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public LocalDate getBirthDate() {
@@ -66,13 +79,5 @@ public class PetDTO {
 
     public void setNotes(String notes) {
         this.notes = notes;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 }
