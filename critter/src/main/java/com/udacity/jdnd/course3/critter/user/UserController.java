@@ -114,7 +114,7 @@ public class UserController {
     public CustomerDTO getOwnerByPet(@PathVariable long petId){
         return convertEntityToCustomerDTO(
                 customerService.getByPetId(petId),
-                getIdsFromPets(customerService.getById(petId).getPets())
+                getIdsFromPets(customerService.getByPetId(petId).getPets())
         );
     }
 
